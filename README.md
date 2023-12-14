@@ -13,10 +13,10 @@ for societal benefit.
 I chose column `CAUSE.CATEGORY` as the response variable because it contains the primary reason for each power outage.
 
 **Evaluation Metrics:**
-Accuracy will be the most suitable metric for predicting the result since the data we predict has multiple categories.
-and the distribution is balanced among all categories.
+Accuracy will be the most suitable metric for predicting the result since the data we predict has multiple categories 
+and the distribution of is balanced among all categories in `CAUSE.CATEGORY`.
 I am not using precision and recall since they are more challenging to interpret and optimize for multiclass.
-classification compared to binary classification. In multiclass scenarios, you have to consider precision and recall.
+classification compared to binary classification. In multiclass scenarios, we have to consider precision and recall 
 for each class, which can lead to trade-offs between classes.
 Thus, the accuracy of metrics is more suitable than the F-1 score, precision, and recall.
 
@@ -48,8 +48,10 @@ highly right-skewed, which needs some stabilization for the purpose of better pr
 included four features from the data. If we can add more correlation features to the model, our prediction could be better.
 
 To further improve the model’s performance, additional steps can be taken, such as:
+
 Feature engineering: explore and include additional relevant features that might have a strong correlation.
 with the `CAUSE.CATEGORY`. These features could provide more discriminatory power and improve the model’s predictive ability.
+
 Hyperparameter tuning: experiment with different hyperparameter settings for the RandomForest classification algorithms to find a configuration that works better.
 
 ## Final Model
@@ -81,13 +83,10 @@ malfunctions increase.
 **Algorithm Chosen:**
 Use random forest classifier rather than a single decision tree classifier.
 
-**Improved Generalization:** Random Forest reduces overfitting by averaging the predictions of multiple trees.
+Improved Generalization: Random Forest reduces overfitting by averaging the predictions of multiple trees.
 Each tree is trained on a random subset of the data and features, which leads to better generalization to unseen data.
 
-**Increased Accuracy:** By aggregating the predictions of multiple trees, a random forest typically produces more accurate results than a single decision tree.
-It reduces the variance associated with individual trees, resulting in a more robust model.
-
-**Handle Complex Relationships:** Random forest can capture complex relationships in the data by combining the insights from multiple trees.
+Handle Complex Relationships: Random forest can capture complex relationships in the data by combining the insights from multiple trees.
 This makes it suitable for datasets with intricate patterns or interactions among features.
 
 **Hyperparameters:**
@@ -111,7 +110,7 @@ We ask the question, “Does our final model perform better for power outages th
 To explore this question, we will run a permutation test where we shuffle the column of `U.S._STATE`.
 My evaluation metric is accuracy.
 
-**Null Hypothesis:** Our model is fair. Its accuracy among power outages that happened in California or New York is roughly the same.
+**Null Hypothesis:** Our model is fair. Its accuracy among power outages that happened in California or New York is roughly the same 
 and any differences are likely due to chance.
 
 **Alternative Hypothesis:** Our model is unfair. The difference in accuracy among power outages that happened in California or New York is statistically significant.
