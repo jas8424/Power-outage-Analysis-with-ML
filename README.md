@@ -2,13 +2,16 @@
 ## Framing the Problem
 In this project, I will predict what caused the power outage with a classification model.
 This will be a multi-class prediction problem, not a binary one, since there are seven different types of factors that caused power outages in the data.
+
 **Why is it Important to Predict that?**
 Predicting event categories causing power outages aids utilities in proactive maintenance, resource allocation, and grid resilience.
 It enhances emergency response, communication, and public awareness. Compliance with regulations, data-driven
 Decision-making and cost-effective planning contribute to minimizing disruptions and optimizing power infrastructure.
 for societal benefit.
+
 **Response Variable:**
 I chose column `CAUSE.CATEGORY` as the response variable because it contains the primary reason for each power outage.
+
 **Evaluation Metrics:**
 Accuracy will be the most suitable metric for predicting the result since the data we predict has multiple categories.
 and the distribution is balanced among all categories.
@@ -16,9 +19,11 @@ I am not using precision and recall since they are more challenging to interpret
 classification compared to binary classification. In multiclass scenarios, you have to consider precision and recall.
 for each class, which can lead to trade-offs between classes.
 Thus, the accuracy of metrics is more suitable than the F-1 score, precision, and recall.
+
 **Information Known:**
-At the time of prediction, we would know the `U.S._STATE`, `CLIMATE.REGION`, 'CUSTOMERS.AFFECTED', etc. Because when a power outage happens, it's
+At the time of prediction, we would know the `U.S._STATE`, `CLIMATE.REGION`, `CUSTOMERS.AFFECTED`, etc. Because when a power outage happens, it's
 It is obvious that we know region it happened, how many people roughly living there were affected, and the climate of that region.
+
 **Data Cleaning:**
 Done the same data cleaning and imputation processes as the last project.
 For the column `CUSTOMERS.AFFECTED`, I used the RandomForestRegressor to predict the null values.
@@ -74,7 +79,7 @@ As the frequency of using power increases, the chance of encountering a power ou
 malfunctions increase.
 
 **Algorithm Chosen:**
-Choose a random forest classifier rather than a single decision tree classifier.
+Use random forest classifier rather than a single decision tree classifier.
 
 **Improved Generalization:** Random Forest reduces overfitting by averaging the predictions of multiple trees.
 Each tree is trained on a random subset of the data and features, which leads to better generalization to unseen data.
@@ -93,6 +98,7 @@ The optimal hyperparameters we found were a
 'max_depth': 20, 'max_features': 'auto','min_samples_split': 2, 'n_estimators': 100
 
 **Model Performance:**
+
 Accuracy of Training Data: 0.9571
 
 Accuracy on Test Data: 0.8508
