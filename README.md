@@ -1,32 +1,30 @@
-What Caused the Power Outage
-### Name: Jason Zhang
-
+**By Jason Zhang**
 ## Framing the Problem
 In this project, I will predict what caused the power outage with a classification model.
 This will be a multi-class prediction problem, not a binary one, since there are seven different types of factors that caused power outages in the data.
-#### Why is it Important to Predict that?
+**Why is it Important to Predict that?**
 Predicting event categories causing power outages aids utilities in proactive maintenance, resource allocation, and grid resilience.
 It enhances emergency response, communication, and public awareness. Compliance with regulations, data-driven
 Decision-making and cost-effective planning contribute to minimizing disruptions and optimizing power infrastructure.
 for societal benefit.
-#### Response Variable:
+**Response Variable:**
 I chose column `CAUSE.CATEGORY` as the response variable because it contains the primary reason for each power outage.
-#### Evaluation Metrics:
+**Evaluation Metrics:**
 Accuracy will be the most suitable metric for predicting the result since the data we predict has multiple categories.
 and the distribution is balanced among all categories.
 I am not using precision and recall since they are more challenging to interpret and optimize for multiclass.
 classification compared to binary classification. In multiclass scenarios, you have to consider precision and recall.
 for each class, which can lead to trade-offs between classes.
 Thus, the accuracy of metrics is more suitable than the F-1 score, precision, and recall.
-#### Information Known:
+**Information Known:**
 At the time of prediction, we would know the `U.S._STATE`, `CLIMATE.REGION`, 'CUSTOMERS.AFFECTED', etc. Because when a power outage happens, it's
 It is obvious that we know region it happened, how many people roughly living there were affected, and the climate of that region.
-#### Data Cleaning:
+**Data Cleaning:**
 Done the same data cleaning and imputation processes as the last project.
 For the column `CUSTOMERS.AFFECTED`, I used the RandomForestRegressor to predict the null values.
 
 ## Baseline Model
-#### Features Used in the Baseline Model:
+**Features Used in the Baseline Model:**
 
 | Column                | Data Type      | Encodeing        | Description                                                                                |
 |-----------------------|----------------|------------------|--------------------------------------------------------------------------------------------|
@@ -35,13 +33,11 @@ For the column `CUSTOMERS.AFFECTED`, I used the RandomForestRegressor to predict
 | `CUSTOMERS.AFFECTED`  | Quantitative   | None             | Number of customers affected by the power outage event                                     |
 | `ANOMALY.LEVEL`       | Quantitative   | None             | The oceanic El Niño/La Niña (ONI) index referring to the cold and warm episodes by season. |
 
-#### Accuracy on Training Data: 
-0.7539
+**Accuracy on Training Data:** 0.7539
 
-####  Accuracy on Test Data: 
-0.7199
+**Accuracy on Test Data:** 0.7199
 
-#### Model Performance:
+**Model Performance:**
 My baseline model is not good enough since I only encoded for one column, while columns like `CUSTOMERS.AFFECTED` are
 highly right-skewed, which needs some stabilization for the purpose of better prediction. Moreover, I only
 included four features from the data. If we can add more correlation features to the model, our prediction could be better.
@@ -52,7 +48,7 @@ with the `CAUSE.CATEGORY`. These features could provide more discriminatory powe
 Hyperparameter tuning: experiment with different hyperparameter settings for the RandomForest classification algorithms to find a configuration that works better.
 
 ## Final Model
-#### Features Added and New Encodeing Feature in the Final Model:
+**Features Added and New Encodeing Features in the Final Model:**
 
 | Column              | Data Type      | Encodeing            | Description                                                                                |
 |---------------------|----------------|----------------------|--------------------------------------------------------------------------------------------|
@@ -61,7 +57,7 @@ Hyperparameter tuning: experiment with different hyperparameter settings for the
 | `DEMAND.LOSS.MW`    | Quantitative   | None                 | Amount of peak demand lost during an outage event                                          |
 | `OUTAGE.DURATION`   | Quantitative   | Standard Scaler      | Duration of outage events (in minutes) |
 
-#### Reasons of Adding New Features:
+**Reasons of Adding New Features:**
 
 `CLIMATE.REGION`: Power outages are heavily influenced by climate regions. Weather-related outages are more common in areas prone to severe weather,
 such as hurricanes or winter storms. Furthermore, seasonal temperature variations cause distinct consumption patterns,
@@ -77,7 +73,7 @@ Thus, it's considerable.
 As the frequency of using power increases, the chance of encountering a power outage that is caused by
 malfunctions increase.
 
-#### Algorithm Chosen:
+**Algorithm Chosen:**
 Choose a random forest classifier rather than a single decision tree classifier.
 
 **Improved Generalization:** Random Forest reduces overfitting by averaging the predictions of multiple trees.
@@ -89,15 +85,14 @@ It reduces the variance associated with individual trees, resulting in a more ro
 **Handle Complex Relationships:** Random forest can capture complex relationships in the data by combining the insights from multiple trees.
 This makes it suitable for datasets with intricate patterns or interactions among features.
 
-#### Hyperparameters:
+**Hyperparameters:**
 
 I tuned a combination of the max depth, number of estimators, minimum sample split, and max features for the random forest to find a
 combination that led to a model that generalized the best to unseen data (i.e., performs well on the test set).
 The optimal hyperparameters we found were a
 'max_depth': 20, 'max_features': 'auto','min_samples_split': 2, 'n_estimators': 100
 
-
-#### Model Performance:
+**Model Performance:**
 Accuracy of Training Data: 0.9571
 
 Accuracy on Test Data: 0.8508
